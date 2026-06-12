@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Álbum · Mayra Danica Biktu Antunce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Cormorant Garamond', Georgia, serif;
+  background:radial-gradient(ellipse at 50% 0%, #0a1840 0%, #020818 60%);
+  min-height:100vh;
+  display:flex; flex-direction:column; align-items:center;
+  padding:2rem 1rem 4rem;
+  overflow-x:hidden;
+}
+
+/* Stars background */
+body::before {
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 30%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 70% 12%, rgba(212,175,55,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 25%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 15% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 80%, rgba(212,175,55,0.3) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 35% 90%, rgba(255,255,255,0.2) 0%, transparent 100%);
+}
+
+/* ===== HEADER ===== */
+.page-header {
+  position:relative; z-index:2;
+  text-align:center; margin-bottom:2.5rem;
+}
+.page-header .tag {
+  font-size:0.65rem; color:rgba(212,175,55,0.6);
+  letter-spacing:8px; display:block; margin-bottom:0.5rem;
+}
+.page-header h1 {
+  font-family:'Dancing Script', cursive;
+  font-size:2.8rem; color:#d4af37;
+  text-shadow:0 0 30px rgba(212,175,55,0.4);
+  line-height:1.1;
+}
+.page-header .sub {
+  font-family:'Playfair Display', serif;
+  font-size:1rem; color:rgba(255,255,255,0.4);
+  letter-spacing:4px; margin-top:0.3rem; font-style:italic;
+}
+.header-divider {
+  width:180px; height:1px;
+  background:linear-gradient(to right, transparent, #d4af37, transparent);
+  margin:0.8rem auto 0;
+}
+
+/* ===== BOOK CONTAINER ===== */
+.book-scene {
+  position:relative; z-index:2;
+  width:100%; max-width:900px;
+  perspective:2000px;
+}
+
+/* The open book layout */
+.book {
+  display:flex; width:100%;
+  min-height:580px;
+  position:relative;
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,0.7));
+}
+
+/* Spine */
+.book-spine {
+  width:30px; flex-shrink:0;
+  background:linear-gradient(to right, #0a1535, #162660, #0a1535);
+  border-top:2px solid rgba(212,175,55,0.4);
+  border-bottom:2px solid rgba(212,175,55,0.4);
+  display:flex; align-items:center; justify-content:center;
+  position:relative; z-index:10;
+  box-shadow:inset -4px 0 12px rgba(0,0,0,0.5), inset 4px 0 8px rgba(0,0,0,0.3);
+}
+.spine-text {
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  font-family:'Dancing Script', cursive;
+  font-size:0.75rem; color:rgba(212,175,55,0.5);
+  letter-spacing:3px; white-space:nowrap;
+}
+
+/* Pages */
+.book-left, .book-right {
+  flex:1;
+  background:linear-gradient(135deg, #080f2a 0%, #0d1a3e 50%, #060d24 100%);
+  border:1px solid rgba(212,175,55,0.2);
+  position:relative; overflow:hidden;
+  padding:2.5rem 2rem;
+}
+.book-left {
+  border-right:none;
+  border-radius:4px 0 0 4px;
+  box-shadow:inset 6px 0 20px rgba(0,0,0,0.3);
+}
+.book-right {
+  border-left:2px solid rgba(212,175,55,0.15);
+  border-radius:0 4px 4px 0;
+  box-shadow:inset -6px 0 20px rgba(0,0,0,0.3);
+}
+
+/* Page texture lines */
+.book-left::before, .book-right::before {
+  content:'';
+  position:absolute; inset:0; pointer-events:none;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 34px,
+    rgba(212,175,55,0.03) 34px,
+    rgba(212,175,55,0.03) 35px
+  );
+}
+
+/* Page corners decoration */
+.page-corner {
+  position:absolute; width:20px; height:20px;
+  border-color:rgba(212,175,55,0.35); border-style:solid;
+}
+.pc-tl { top:10px; left:10px; border-width:2px 0 0 2px; }
+.pc-tr { top:10px; right:10px; border-width:2px 2px 0 0; }
+.pc-bl { bottom:10px; left:10px; border-width:0 0 2px 2px; }
+.pc-br { bottom:10px; right:10px; border-width:0 2px 2px 0; }
+
+/* Page number */
+.page-num {
+  position:absolute; bottom:14px; 
+  font-size:0.62rem; color:rgba(212,175,55,0.35);
+  letter-spacing:3px;
+}
+.book-left .page-num { left:50%; transform:translateX(-50%); }
+.book-right .page-num { right:50%; transform:translateX(50%); }
+
+/* ===== COVER PAGE (left) ===== */
+.cover-content {
+  display:flex; flex-direction:column; align-items:center;
+  text-align:center; height:100%; justify-content:center;
+  gap:1rem;
+}
+
+/* Photo circle */
+.photo-ring-wrap {
+  position:relative; display:inline-block; cursor:pointer;
+}
+.photo-ring {
+  position:relative; display:inline-block;
+}
+.photo-ring::before {
+  content:'';
+  position:absolute; inset:-8px; border-radius:50%;
+  border:2px solid transparent;
+  background:conic-gradient(#d4af37 0deg, rgba(212,175,55,0.1) 120deg, #d4af37 180deg, rgba(212,175,55,0.1) 300deg, #d4af37 360deg) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  animation:spinRing 6s linear infinite;
+}
+@keyframes spinRing { to { transform:rotate(360deg); } }
+.photo-ring::after {
+  content:'';
+  position:absolute; inset:-16px; border-radius:50%;
+  border:1px solid rgba(212,175,55,0.15);
+}
+
+.photo-circle {
+  width:140px; height:140px; border-radius:50%;
+  object-fit:cover; display:block;
+  border:3px solid rgba(212,175,55,0.5);
+  box-shadow:0 0 30px rgba(100,160,255,0.25), 0 0 60px rgba(212,175,55,0.1);
+}
+.photo-placeholder {
+  width:140px; height:140px; border-radius:50%;
+  background:radial-gradient(circle at 40% 35%, rgba(100,160,255,0.2), rgba(5,13,46,0.95));
+  border:3px solid rgba(212,175,55,0.4);
+  box-shadow:0 0 30px rgba(100,160,255,0.2);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  cursor:pointer; transition:all 0.3s;
+  gap:0.3rem;
+}
+.photo-placeholder:hover { border-color:#d4af37; box-shadow:0 0 40px rgba(212,175,55,0.35); }
+.photo-placeholder .icon { font-size:2.2rem; }
+.photo-placeholder .lbl { font-size:0.5rem; color:rgba(212,175,55,0.5); letter-spacing:2px; }
+
+/* Gold gems around photo */
+.gem-dot {
+  position:absolute; width:7px; height:7px; border-radius:50%;
+  background:#d4af37; box-shadow:0 0 8px #d4af37;
+  animation:gemPulse 2s ease-in-out infinite;
+}
+@keyframes gemPulse { 0%,100%{opacity:0.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.5);} }
+
+.cover-title {
+  font-family:'Dancing Script', cursive;
+  font-size:1.9rem; color:#d4af37;
+  text-shadow:0 0 20px rgba(212,175,55,0.4);
+  line-height:1.2;
+}
+.cover-name {
+  font-family:'Playfair Display', serif;
+  font-size:1.05rem; color:#fff;
+  letter-spacing:2px; line-height:1.5;
+}
+.cover-divider {
+  width:120px; height:1px;
+  background:linear-gradient(to right, transparent, rgba(212,175,55,0.6), transparent);
+}
+.cover-date {
+  font-style:italic; color:rgba(212,175,55,0.55);
+  font-size:0.82rem; letter-spacing:3px;
+}
+.cover-bow { font-size:2rem; animation:bowBob 3s ease-in-out infinite; }
+@keyframes bowBob { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+
+/* ===== RIGHT PAGE — Navigator ===== */
+.right-content {
+  display:flex; flex-direction:column; height:100%;
+}
+.page-label {
+  font-size:0.6rem; color:rgba(212,175,55,0.5);
+  letter-spacing:5px; margin-bottom:0.8rem;
+  text-align:center;
+}
+.page-title-big {
+  font-family:'Playfair Display', serif;
+  font-size:1.4rem; color:#fff;
+  letter-spacing:2px; margin-bottom:0.5rem;
+  text-align:center;
+}
+.right-divider {
+  width:100%; height:1px;
+  background:linear-gradient(to right, transparent, rgba(212,175,55,0.3), transparent);
+  margin-bottom:1.2rem;
+}
+
+/* Pages navigation tabs */
+.pages-nav {
+  display:flex; flex-direction:column; gap:0.6rem; flex:1;
+}
+.page-tab {
+  display:flex; align-items:center; gap:0.8rem;
+  padding:0.75rem 1rem;
+  border:1px solid rgba(212,175,55,0.12);
+  background:rgba(255,255,255,0.02);
+  cursor:pointer; transition:all 0.25s;
+  border-radius:4px; position:relative; overflow:hidden;
+}
+.page-tab::before {
+  content:''; position:absolute; left:0; top:0; bottom:0;
+  width:3px; background:#d4af37; opacity:0;
+  transition:opacity 0.25s;
+}
+.page-tab:hover { border-color:rgba(212,175,55,0.35); background:rgba(212,175,55,0.04); }
+.page-tab:hover::before { opacity:1; }
+.page-tab.active { border-color:rgba(212,175,55,0.4); background:rgba(212,175,55,0.07); }
+.page-tab.active::before { opacity:1; }
+.tab-num {
+  font-family:'Playfair Display', serif;
+  font-size:1.4rem; color:rgba(212,175,55,0.3);
+  min-width:28px; font-style:italic;
+}
+.tab-info { flex:1; }
+.tab-title { font-size:0.9rem; color:rgba(255,255,255,0.8); letter-spacing:1px; }
+.tab-sub { font-size:0.68rem; color:rgba(255,255,255,0.3); font-style:italic; margin-top:0.1rem; }
+.tab-icon { font-size:1.2rem; }
+
+/* ===== ALBUM PAGES (full width) ===== */
+.album-page {
+  display:none;
+  width:100%; max-width:900px;
+  position:relative; z-index:2;
+  margin-top:0.5rem;
+  background:linear-gradient(135deg, #080f2a 0%, #0d1a3e 50%, #060d24 100%);
+  border:1px solid rgba(212,175,55,0.2);
+  border-radius:4px;
+  padding:2.5rem 2.5rem 3.5rem;
+  min-height:540px;
+  filter:drop-shadow(0 20px 50px rgba(0,0,0,0.6));
+  animation:pageOpen 0.4s ease;
+}
+.album-page.open { display:block; }
+@keyframes pageOpen { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* Album page decorations */
+.album-page::before {
+  content:'';
+  position:absolute; inset:0; pointer-events:none; border-radius:4px;
+  background:repeating-linear-gradient(0deg,transparent,transparent 34px,rgba(212,175,55,0.025) 34px,rgba(212,175,55,0.025) 35px);
+}
+.ap-corner { position:absolute; width:20px; height:20px; border-color:rgba(212,175,55,0.35); border-style:solid; }
+.ap-tl { top:10px; left:10px; border-width:2px 0 0 2px; }
+.ap-tr { top:10px; right:10px; border-width:2px 2px 0 0; }
+.ap-bl { bottom:10px; left:10px; border-width:0 0 2px 2px; }
+.ap-br { bottom:10px; right:10px; border-width:0 2px 2px 0; }
+
+.ap-header { text-align:center; margin-bottom:1.8rem; position:relative; z-index:1; }
+.ap-tag { font-size:0.6rem; color:rgba(212,175,55,0.5); letter-spacing:6px; display:block; margin-bottom:0.4rem; }
+.ap-title { font-family:'Playfair Display', serif; font-size:1.5rem; color:#d4af37; letter-spacing:3px; }
+.ap-divider { width:140px; height:1px; background:linear-gradient(to right,transparent,rgba(212,175,55,0.5),transparent); margin:0.6rem auto 0; }
+
+/* Photo grid */
+.photo-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; position:relative; z-index:1; }
+.photo-grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.2rem; position:relative; z-index:1; }
+.photo-grid-1 { display:grid; grid-template-columns:1fr; max-width:380px; margin:0 auto; position:relative; z-index:1; }
+
+.photo-slot {
+  position:relative;
+  border:1px solid rgba(212,175,55,0.2);
+  background:rgba(255,255,255,0.02);
+  overflow:hidden; cursor:pointer; transition:all 0.3s;
+  border-radius:3px;
+}
+.photo-slot:hover { border-color:rgba(212,175,55,0.5); box-shadow:0 0 20px rgba(212,175,55,0.1); }
+.photo-slot::before,.photo-slot::after { content:''; position:absolute; width:12px; height:12px; border-color:rgba(212,175,55,0.4); border-style:solid; z-index:2; }
+.photo-slot::before { top:-1px; left:-1px; border-width:2px 0 0 2px; }
+.photo-slot::after  { bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
+
+.slot-photo { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
+.slot-placeholder {
+  width:100%; aspect-ratio:4/3;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:0.4rem; color:rgba(212,175,55,0.3); font-size:0.65rem; letter-spacing:2px;
+  background:radial-gradient(ellipse at center, rgba(10,30,80,0.5), rgba(2,8,24,0.8));
+}
+.slot-placeholder .big-icon { font-size:2rem; opacity:0.5; }
+.slot-caption {
+  padding:0.6rem 0.8rem;
+  font-size:0.72rem; color:rgba(255,255,255,0.5);
+  font-style:italic; line-height:1.5;
+  border-top:1px solid rgba(212,175,55,0.08);
+  position:relative; z-index:1;
+}
+.slot-caption strong { color:rgba(212,175,55,0.7); font-style:normal; display:block; margin-bottom:0.1rem; font-size:0.7rem; letter-spacing:1px; }
+
+.slot-input-hidden { display:none; }
+
+/* Text content in pages */
+.ap-text-block {
+  position:relative; z-index:1;
+  color:rgba(255,255,255,0.6); font-style:italic;
+  line-height:2; font-size:1rem; letter-spacing:0.5px;
+}
+.ap-text-block p { margin-bottom:1rem; }
+.ap-text-block .highlight {
+  color:#d4af37; font-style:normal;
+  font-family:'Playfair Display', serif;
+}
+
+/* Quote box */
+.quote-box {
+  border-left:3px solid rgba(212,175,55,0.4);
+  padding:0.8rem 1.2rem; margin:1.2rem 0;
+  background:rgba(212,175,55,0.04);
+  font-style:italic; color:rgba(255,255,255,0.55);
+  font-size:1.05rem; line-height:1.8;
+  position:relative; z-index:1;
+}
+.quote-box::before { content:'"'; font-size:3rem; color:rgba(212,175,55,0.2); position:absolute; top:-0.5rem; left:0.5rem; font-family:'Playfair Display',serif; line-height:1; }
+
+/* 2-col layout */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:2rem; position:relative; z-index:1; align-items:start; }
+
+/* Nav buttons */
+.book-nav {
+  display:flex; justify-content:center; align-items:center;
+  gap:1.5rem; margin-top:1.5rem; position:relative; z-index:2;
+}
+.bnav-btn {
+  background:transparent; border:1px solid rgba(212,175,55,0.3);
+  color:rgba(212,175,55,0.8); padding:0.55rem 1.6rem;
+  font-family:'Cormorant Garamond', serif; font-size:0.8rem;
+  letter-spacing:3px; cursor:pointer; transition:all 0.25s; border-radius:2px;
+}
+.bnav-btn:hover { background:rgba(212,175,55,0.1); border-color:#d4af37; color:#d4af37; }
+.bnav-btn:disabled { opacity:0.25; cursor:not-allowed; }
+.page-indicator {
+  font-size:0.7rem; color:rgba(212,175,55,0.5);
+  letter-spacing:3px; min-width:120px; text-align:center;
+}
+
+/* Close page button */
+.close-page-btn {
+  background:transparent; border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.3); padding:0.3rem 0.8rem;
+  font-size:0.7rem; cursor:pointer; border-radius:20px;
+  font-family:'Cormorant Garamond', serif; letter-spacing:1px;
+  transition:all 0.2s; margin-bottom:0.5rem; display:inline-block;
+}
+.close-page-btn:hover { border-color:rgba(212,175,55,0.3); color:rgba(212,175,55,0.6); }
+
+/* Poem style */
+.poem { text-align:center; position:relative; z-index:1; margin-top:1rem; }
+.poem-line { font-style:italic; color:rgba(255,255,255,0.55); font-size:1rem; line-height:2.2; letter-spacing:1px; }
+.poem-line.gold { color:rgba(212,175,55,0.7); font-style:normal; font-family:'Playfair Display',serif; font-size:0.9rem; letter-spacing:4px; }
+
+/* Responsive */
+@media(max-width:700px){
+  .book { flex-direction:column; }
+  .book-spine { width:100%; height:20px; writing-mode:horizontal-tb; }
+  .spine-text { writing-mode:horizontal-tb; transform:none; }
+  .book-left { border-radius:4px 4px 0 0; border-right:1px solid rgba(212,175,55,0.2); border-bottom:none; }
+  .book-right { border-radius:0 0 4px 4px; border-left:1px solid rgba(212,175,55,0.2); border-top:none; }
+  .photo-grid-2, .photo-grid-3 { grid-template-columns:1fr 1fr; }
+  .two-col { grid-template-columns:1fr; }
+  .page-header h1 { font-size:2rem; }
+}
+@media(max-width:480px){
+  .photo-grid-3 { grid-template-columns:1fr 1fr; }
+  .album-page { padding:1.5rem 1rem 3rem; }
+  .book-left, .book-right { padding:1.5rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <span class="tag">✦ &nbsp; Á L B U M &nbsp; D E &nbsp; R E C U E R D O S &nbsp; ✦</span>
+  <h1>Mi Álbum ✨</h1>
+  <div class="sub">MAYRA DANICA BIKTU ANTUNCE</div>
+  <div class="header-divider"></div>
+</div>
+
+<!-- THE OPEN BOOK -->
+<div class="book-scene">
+  <div class="book">
+
+    <!-- SPINE -->
+    <div class="book-spine">
+      <span class="spine-text">Mis XV Años · 2026</span>
+    </div>
+
+    <!-- LEFT PAGE: Cover -->
+    <div class="book-left">
+      <div class="page-corner pc-tl"></div>
+      <div class="page-corner pc-tr"></div>
+      <div class="page-corner pc-bl"></div>
+      <div class="page-corner pc-br"></div>
+
+      <div class="cover-content">
+        <div class="cover-bow">👑</div>
+
+        <!-- PHOTO CIRCLE -->
+        <div class="photo-ring-wrap">
+          <div class="photo-ring" id="coverRing">
+            <div class="photo-placeholder" id="coverPlaceholder" onclick="document.getElementById('coverPhotoIn').click()">
+              <span class="icon">🌸</span>
+              <span class="lbl">MI FOTO</span>
+            </div>
+            <img id="coverPhoto" class="photo-circle" src="" alt="Mayra" style="display:none;">
+          </div>
+          <!-- Gem dots -->
+          <div class="gem-dot" style="top:2%; left:50%; margin-left:-3.5px; animation-delay:0s;"></div>
+          <div class="gem-dot" style="top:50%; left:97%; margin-top:-3.5px; animation-delay:0.7s;"></div>
+          <div class="gem-dot" style="top:97%; left:50%; margin-left:-3.5px; animation-delay:1.4s;"></div>
+          <div class="gem-dot" style="top:50%; left:-2%; margin-top:-3.5px; animation-delay:2.1s;"></div>
+        </div>
+        <input type="file" id="coverPhotoIn" accept="image/*" onchange="loadCoverPhoto(this)">
+
+        <div class="cover-title">Mi Álbum de<br>Recuerdos</div>
+        <div class="cover-divider"></div>
+        <div class="cover-name">Mayra Danica<br>Biktu Antunce</div>
+        <div class="cover-date">✦ &nbsp; XV AÑOS · 2026 &nbsp; ✦</div>
+      </div>
+
+      <div class="page-num">Portada</div>
+    </div>
+
+    <!-- RIGHT PAGE: Index -->
+    <div class="book-right">
+      <div class="page-corner pc-tl"></div>
+      <div class="page-corner pc-tr"></div>
+      <div class="page-corner pc-bl"></div>
+      <div class="page-corner pc-br"></div>
+
+      <div class="right-content">
+        <div class="page-label">✦ &nbsp; C O N T E N I D O &nbsp; ✦</div>
+        <div class="page-title-big">Mis Páginas</div>
+        <div class="right-divider"></div>
+
+        <div class="pages-nav">
+          <div class="page-tab" id="tab-0" onclick="openPage(0)">
+            <span class="tab-num">I</span>
+            <div class="tab-info">
+              <div class="tab-title">Sobre Mí</div>
+              <div class="tab-sub">Mi historia y quién soy</div>
+            </div>
+            <span class="tab-icon">🦋</span>
+          </div>
+          <div class="page-tab" id="tab-1" onclick="openPage(1)">
+            <span class="tab-num">II</span>
+            <div class="tab-info">
+              <div class="tab-title">Mi Familia</div>
+              <div class="tab-sub">Las personas que más amo</div>
+            </div>
+            <span class="tab-icon">💛</span>
+          </div>
+          <div class="page-tab" id="tab-2" onclick="openPage(2)">
+            <span class="tab-num">III</span>
+            <div class="tab-info">
+              <div class="tab-title">Mis Amigos</div>
+              <div class="tab-sub">Momentos especiales juntos</div>
+            </div>
+            <span class="tab-icon">✨</span>
+          </div>
+          <div class="page-tab" id="tab-3" onclick="openPage(3)">
+            <span class="tab-num">IV</span>
+            <div class="tab-info">
+              <div class="tab-title">Mis Sueños</div>
+              <div class="tab-sub">Lo que me hace feliz</div>
+            </div>
+            <span class="tab-icon">🌟</span>
+          </div>
+          <div class="page-tab" id="tab-4" onclick="openPage(4)">
+            <span class="tab-num">V</span>
+            <div class="tab-info">
+              <div class="tab-title">Mi Noche Especial</div>
+              <div class="tab-sub">Fotos de mis XV años</div>
+            </div>
+            <span class="tab-icon">👑</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-num">Índice</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE I: SOBRE MÍ ===== -->
+<div class="album-page" id="page-0">
+  <div class="ap-corner ap-tl"></div><div class="ap-corner ap-tr"></div>
+  <div class="ap-corner ap-bl"></div><div class="ap-corner ap-br"></div>
+
+  <div class="ap-header">
+    <span class="ap-tag">✦ &nbsp; P Á G I N A &nbsp; I &nbsp; ✦</span>
+    <div class="ap-title">Sobre Mí 🦋</div>
+    <div class="ap-divider"></div>
+  </div>
+
+  <div class="two-col">
+    <!-- Photo -->
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p0photo').click()">
+        <div class="slot-placeholder" id="p0ph"><span class="big-icon">📸</span><span>AGREGAR FOTO</span></div>
+        <img id="p0img" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption">
+          <strong>✦ Mi Foto Favorita</strong>
+          Un momento especial que quiero recordar siempre
+        </div>
+      </div>
+      <input type="file" id="p0photo" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p0img','p0ph')">
+    </div>
+    <!-- Text -->
+    <div class="ap-text-block">
+      <p>Hola, mi nombre es <span class="highlight">Mayra Danica Biktu Antunce</span> y hoy celebro uno de los días más importantes de mi vida.</p>
+      <div class="quote-box">
+        Hoy tengo 15 años y el mundo entero está frente a mí, lleno de posibilidades y sueños hermosos por alcanzar.
+      </div>
+      <p>Nací para brillar, para amar y para llenar de luz la vida de quienes me rodean. <span class="highlight">Este álbum</span> es mi historia contada con amor. ✨</p>
+      <div class="poem">
+        <div class="poem-line gold">✦ M A Y R A ✦</div>
+        <div class="poem-line">Magia en cada paso,</div>
+        <div class="poem-line">Amor que siempre crece,</div>
+        <div class="poem-line">Años que se vuelven recuerdos,</div>
+        <div class="poem-line">Risa que nunca se detiene,</div>
+        <div class="poem-line">Alma que ilumina todo.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE II: MI FAMILIA ===== -->
+<div class="album-page" id="page-1">
+  <div class="ap-corner ap-tl"></div><div class="ap-corner ap-tr"></div>
+  <div class="ap-corner ap-bl"></div><div class="ap-corner ap-br"></div>
+
+  <div class="ap-header">
+    <span class="ap-tag">✦ &nbsp; P Á G I N A &nbsp; I I &nbsp; ✦</span>
+    <div class="ap-title">Mi Familia 💛</div>
+    <div class="ap-divider"></div>
+  </div>
+
+  <div class="photo-grid-2">
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p1a').click()">
+        <div class="slot-placeholder" id="p1aph"><span class="big-icon">👨‍👩‍👧</span><span>AGREGAR FOTO</span></div>
+        <img id="p1aimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Mis Padres</strong>Mi mayor tesoro y apoyo incondicional</div>
+      </div>
+      <input type="file" id="p1a" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p1aimg','p1aph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p1b').click()">
+        <div class="slot-placeholder" id="p1bph"><span class="big-icon">🏠</span><span>AGREGAR FOTO</span></div>
+        <img id="p1bimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ En Familia</strong>Momentos que llenan el corazón</div>
+      </div>
+      <input type="file" id="p1b" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p1bimg','p1bph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p1c').click()">
+        <div class="slot-placeholder" id="p1cph"><span class="big-icon">🌹</span><span>AGREGAR FOTO</span></div>
+        <img id="p1cimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Recuerdos</strong>Siempre juntos, siempre unidos</div>
+      </div>
+      <input type="file" id="p1c" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p1cimg','p1cph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p1d').click()">
+        <div class="slot-placeholder" id="p1dph"><span class="big-icon">💛</span><span>AGREGAR FOTO</span></div>
+        <img id="p1dimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Mi Familia</strong>El amor más grande del mundo</div>
+      </div>
+      <input type="file" id="p1d" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p1dimg','p1dph')">
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE III: MIS AMIGOS ===== -->
+<div class="album-page" id="page-2">
+  <div class="ap-corner ap-tl"></div><div class="ap-corner ap-tr"></div>
+  <div class="ap-corner ap-bl"></div><div class="ap-corner ap-br"></div>
+
+  <div class="ap-header">
+    <span class="ap-tag">✦ &nbsp; P Á G I N A &nbsp; I I I &nbsp; ✦</span>
+    <div class="ap-title">Mis Amigos ✨</div>
+    <div class="ap-divider"></div>
+  </div>
+
+  <div class="photo-grid-3">
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p2a').click()">
+        <div class="slot-placeholder" id="p2aph"><span class="big-icon">👭</span><span>FOTO</span></div>
+        <img id="p2aimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Mis Mejores Amigas</strong>Siempre juntas</div>
+      </div>
+      <input type="file" id="p2a" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p2aimg','p2aph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p2b').click()">
+        <div class="slot-placeholder" id="p2bph"><span class="big-icon">🌸</span><span>FOTO</span></div>
+        <img id="p2bimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Momentos Juntos</strong>Risas que duran para siempre</div>
+      </div>
+      <input type="file" id="p2b" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p2bimg','p2bph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p2c').click()">
+        <div class="slot-placeholder" id="p2cph"><span class="big-icon">🦋</span><span>FOTO</span></div>
+        <img id="p2cimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Amistad</strong>Un tesoro que no tiene precio</div>
+      </div>
+      <input type="file" id="p2c" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p2cimg','p2cph')">
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem;">
+    <div class="quote-box" style="position:relative;z-index:1;">
+      "Los amigos son la familia que elegimos. Gracias por hacer cada momento más especial y lleno de alegría."
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE IV: MIS SUEÑOS ===== -->
+<div class="album-page" id="page-3">
+  <div class="ap-corner ap-tl"></div><div class="ap-corner ap-tr"></div>
+  <div class="ap-corner ap-bl"></div><div class="ap-corner ap-br"></div>
+
+  <div class="ap-header">
+    <span class="ap-tag">✦ &nbsp; P Á G I N A &nbsp; I V &nbsp; ✦</span>
+    <div class="ap-title">Mis Sueños 🌟</div>
+    <div class="ap-divider"></div>
+  </div>
+
+  <div class="two-col">
+    <div class="ap-text-block">
+      <p>A mis <span class="highlight">quince años</span> el mundo se abre ante mí con infinitas posibilidades. Tengo sueños grandes y el corazón lleno de esperanza.</p>
+
+      <div class="quote-box">
+        Quiero volar alto, aprender sin límites y dejar huella en todo lo que haga con amor y dedicación.
+      </div>
+
+      <p>Mis sueños son mi <span class="highlight">brújula</span>. Cada día me despierto con ganas de ser mejor, de crecer y de hacer felices a quienes amo. 🌟</p>
+      <p>Esta noche de XV años es solo el comienzo de la historia más <span class="highlight">hermosa</span> que estoy escribiendo. ✨</p>
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p3a').click()">
+        <div class="slot-placeholder" id="p3aph"><span class="big-icon">🌟</span><span>AGREGAR FOTO</span></div>
+        <img id="p3aimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Mis Sueños</strong>Todo lo que quiero lograr</div>
+      </div>
+      <input type="file" id="p3a" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p3aimg','p3aph')">
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE V: MI NOCHE ESPECIAL ===== -->
+<div class="album-page" id="page-4">
+  <div class="ap-corner ap-tl"></div><div class="ap-corner ap-tr"></div>
+  <div class="ap-corner ap-bl"></div><div class="ap-corner ap-br"></div>
+
+  <div class="ap-header">
+    <span class="ap-tag">✦ &nbsp; P Á G I N A &nbsp; V &nbsp; ✦</span>
+    <div class="ap-title">Mi Noche Especial 👑</div>
+    <div class="ap-divider"></div>
+  </div>
+
+  <div class="photo-grid-3">
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p4a').click()">
+        <div class="slot-placeholder" id="p4aph"><span class="big-icon">👗</span><span>FOTO</span></div>
+        <img id="p4aimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Mi Vestido</strong>La quinceañera más bella</div>
+      </div>
+      <input type="file" id="p4a" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p4aimg','p4aph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p4b').click()">
+        <div class="slot-placeholder" id="p4bph"><span class="big-icon">💃</span><span>FOTO</span></div>
+        <img id="p4bimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ El Vals</strong>El baile que siempre soñé</div>
+      </div>
+      <input type="file" id="p4b" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p4bimg','p4bph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p4c').click()">
+        <div class="slot-placeholder" id="p4cph"><span class="big-icon">🎂</span><span>FOTO</span></div>
+        <img id="p4cimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Mi Pastel</strong>El momento más dulce</div>
+      </div>
+      <input type="file" id="p4c" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p4cimg','p4cph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p4d').click()">
+        <div class="slot-placeholder" id="p4dph"><span class="big-icon">🌹</span><span>FOTO</span></div>
+        <img id="p4dimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Mis Chambelanes</strong>Una noche de ensueño</div>
+      </div>
+      <input type="file" id="p4d" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p4dimg','p4dph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p4e').click()">
+        <div class="slot-placeholder" id="p4eph"><span class="big-icon">✨</span><span>FOTO</span></div>
+        <img id="p4eimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Mi Corona</strong>La princesa que siempre fui</div>
+      </div>
+      <input type="file" id="p4e" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p4eimg','p4eph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p4f').click()">
+        <div class="slot-placeholder" id="p4fph"><span class="big-icon">🎊</span><span>FOTO</span></div>
+        <img id="p4fimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ La Fiesta</strong>Momentos que nunca olvidaré</div>
+      </div>
+      <input type="file" id="p4f" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p4fimg','p4fph')">
+    </div>
+  </div>
+</div>
+
+<!-- NAVIGATION BUTTONS -->
+<div class="book-nav" id="bookNav" style="display:none;">
+  <button class="bnav-btn" id="prevPageBtn" onclick="changePage(-1)" disabled>← ANTERIOR</button>
+  <span class="page-indicator" id="pageInd">Página I · 1 de 5</span>
+  <button class="bnav-btn" id="nextPageBtn" onclick="changePage(1)">SIGUIENTE →</button>
+</div>
+
+<script>
+let currentPage = -1;
+const totalPages = 5;
+const pageTitles = ['Sobre Mí','Mi Familia','Mis Amigos','Mis Sueños','Mi Noche Especial'];
+
+function openPage(idx){
+  // Close any open page
+  document.querySelectorAll('.album-page').forEach(p => p.classList.remove('open'));
+  document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+
+  if(currentPage === idx){
+    // Toggle off — close book pages
+    currentPage = -1;
+    document.getElementById('bookNav').style.display = 'none';
+    return;
+  }
+
+  currentPage = idx;
+  document.getElementById('page-' + idx).classList.add('open');
+  document.getElementById('tab-' + idx).classList.add('active');
+  document.getElementById('bookNav').style.display = 'flex';
+  updateNav();
+
+  // Smooth scroll to album page
+  setTimeout(() => {
+    document.getElementById('page-' + idx).scrollIntoView({behavior:'smooth', block:'start'});
+  }, 80);
+}
+
+function changePage(dir){
+  const next = currentPage + dir;
+  if(next < 0 || next >= totalPages) return;
+  openPage(next);
+}
+
+function updateNav(){
+  document.getElementById('prevPageBtn').disabled = currentPage === 0;
+  document.getElementById('nextPageBtn').disabled = currentPage === totalPages - 1;
+  document.getElementById('pageInd').textContent =
+    pageTitles[currentPage] + ' · ' + (currentPage + 1) + ' de ' + totalPages;
+}
+
+// Cover photo
+function loadCoverPhoto(input){
+  if(!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = document.getElementById('coverPhoto');
+    const ph  = document.getElementById('coverPlaceholder');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    ph.style.display  = 'none';
+    try { localStorage.setItem('album_cover_mayra', e.target.result); } catch(err){}
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+// Slot photos
+function loadSlotPhoto(input, imgId, phId){
+  if(!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = document.getElementById(imgId);
+    const ph  = document.getElementById(phId);
+    img.src = e.target.result;
+    img.style.display = 'block';
+    ph.style.display  = 'none';
+    try { localStorage.setItem('album_slot_' + imgId, e.target.result); } catch(err){}
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+// Restore saved photos on load
+window.addEventListener('load', () => {
+  try {
+    const cover = localStorage.getItem('album_cover_mayra');
+    if(cover){
+      document.getElementById('coverPhoto').src = cover;
+      document.getElementById('coverPhoto').style.display = 'block';
+      document.getElementById('coverPlaceholder').style.display = 'none';
+    }
+    const slotIds = ['p0img','p1aimg','p1bimg','p1cimg','p1dimg','p2aimg','p2bimg','p2cimg','p3aimg','p4aimg','p4bimg','p4cimg','p4dimg','p4eimg','p4fimg'];
+    slotIds.forEach(id => {
+      const saved = localStorage.getItem('album_slot_' + id);
+      if(saved){
+        const img = document.getElementById(id);
+        const phId = id.replace('img','ph');
+        img.src = saved; img.style.display = 'block';
+        const ph = document.getElementById(phId);
+        if(ph) ph.style.display = 'none';
+      }
+    });
+  } catch(e){}
+});
+</script>
+</body>
+</html>
