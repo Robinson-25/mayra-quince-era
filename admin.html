@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Mis XV Años - Mayra Danica Biktu Antunce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Cormorant Garamond', Georgia, serif;
+  background: #020818;
+  min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  padding:1.5rem 1rem;
+}
+
+/* ===== FONDO ANIMADO ===== */
+body::before {
+  content:'';
+  position:fixed; inset:0; z-index:0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(10,31,94,0.8) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(5,13,46,0.9) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #020818 0%, #020818 100%);
+}
+
+/* ===== ADMIN BOX ===== */
+.admin-box {
+  position:relative; z-index:1;
+  background:rgba(5,13,46,0.95);
+  border:1px solid rgba(212,175,55,0.3);
+  border-radius:16px;
+  padding:2rem;
+  max-width:1000px; width:100%;
+  margin:auto;
+  box-shadow: 0 0 60px rgba(212,175,55,0.08), 0 20px 60px rgba(0,0,0,0.5);
+  backdrop-filter:blur(20px);
+}
+
+/* ===== HEADER ===== */
+.admin-header {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  margin-bottom:2rem; flex-wrap:wrap; gap:1rem;
+  padding-bottom:1.5rem;
+  border-bottom:1px solid rgba(212,175,55,0.15);
+}
+.admin-title-wrap h2 {
+  color:#d4af37; font-size:1.5rem; letter-spacing:3px;
+  font-family:'Playfair Display',serif; margin:0;
+  text-shadow:0 0 20px rgba(212,175,55,0.4);
+}
+.admin-title-wrap .sub {
+  color:rgba(255,255,255,0.45); font-style:italic;
+  font-size:0.8rem; margin-top:0.3rem;
+}
+.header-actions { display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center; }
+
+.btn-csv {
+  background:transparent;
+  border:1px solid rgba(100,200,100,0.5);
+  color:rgba(100,220,100,0.9);
+  padding:0.5rem 1.2rem; border-radius:8px;
+  cursor:pointer; font-size:0.75rem; letter-spacing:2px;
+  font-family:'Cormorant Garamond',serif; transition:all 0.2s;
+}
+.btn-csv:hover { background:rgba(100,200,100,0.12); border-color:rgba(100,200,100,0.8); }
+
+.btn-refresh {
+  background:transparent;
+  border:1px solid rgba(100,160,255,0.5);
+  color:rgba(100,180,255,0.9);
+  padding:0.5rem 1.2rem; border-radius:8px;
+  cursor:pointer; font-size:0.75rem; letter-spacing:2px;
+  font-family:'Cormorant Garamond',serif; transition:all 0.2s;
+}
+.btn-refresh:hover { background:rgba(100,160,255,0.12); }
+
+.btn-volver {
+  background:rgba(212,175,55,0.1);
+  border:1px solid rgba(212,175,55,0.4);
+  color:#d4af37;
+  padding:0.5rem 1.2rem; border-radius:8px;
+  cursor:pointer; font-size:0.8rem; letter-spacing:2px;
+  font-family:'Cormorant Garamond',serif; transition:all 0.2s;
+  text-decoration:none; display:inline-block;
+}
+.btn-volver:hover { background:rgba(212,175,55,0.2); border-color:#d4af37; }
+
+/* ===== STATS ===== */
+.admin-stats { display:flex; gap:1rem; margin-bottom:2rem; flex-wrap:wrap; }
+.stat-card {
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(212,175,55,0.2);
+  border-radius:12px; padding:1.2rem 1.5rem;
+  text-align:center; flex:1; min-width:100px;
+  transition:all 0.3s;
+}
+.stat-card:hover { background:rgba(212,175,55,0.05); border-color:rgba(212,175,55,0.4); }
+.stat-num {
+  font-family:'Playfair Display',serif; font-size:2.5rem;
+  color:#d4af37; line-height:1;
+  text-shadow:0 0 20px rgba(212,175,55,0.5);
+}
+.stat-lbl { font-size:0.6rem; color:rgba(255,255,255,0.45); letter-spacing:3px; margin-top:0.4rem; }
+.stat-card.green { border-color:rgba(37,211,102,0.3); }
+.stat-card.green .stat-num { color:#25d366; text-shadow:0 0 20px rgba(37,211,102,0.4); }
+.stat-card.blue { border-color:rgba(100,160,255,0.3); }
+.stat-card.blue .stat-num { color:#60a0ff; text-shadow:0 0 20px rgba(100,160,255,0.4); }
+
+/* ===== FILTERS ===== */
+.admin-filters { display:flex; gap:0.5rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+.filter-btn {
+  background:transparent; border:1px solid rgba(212,175,55,0.2);
+  color:rgba(255,255,255,0.55); padding:0.4rem 1.1rem; border-radius:20px;
+  cursor:pointer; font-size:0.75rem; letter-spacing:1px;
+  font-family:'Cormorant Garamond',serif; transition:all 0.2s;
+}
+.filter-btn.active, .filter-btn:hover {
+  background:rgba(212,175,55,0.15); border-color:rgba(212,175,55,0.6);
+  color:#d4af37;
+}
+
+/* ===== LOADING ===== */
+.loading {
+  text-align:center; padding:3rem;
+  color:rgba(212,175,55,0.6); font-style:italic; font-size:1rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:0.4;} 50%{opacity:1;} }
+
+/* ===== TABLE ===== */
+.table-wrap { overflow-x:auto; border-radius:10px; -webkit-overflow-scrolling:touch; }
+.guests-table { width:100%; border-collapse:collapse; font-size:0.85rem; min-width:580px; }
+.guests-table th {
+  background:rgba(212,175,55,0.12); color:#d4af37;
+  padding:0.9rem 1rem; text-align:left; font-weight:700;
+  letter-spacing:2px; font-size:0.62rem;
+  border-bottom:2px solid rgba(212,175,55,0.2);
+}
+.guests-table td {
+  padding:0.85rem 1rem;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.9); vertical-align:middle;
+}
+.guests-table tr:last-child td { border-bottom:none; }
+.guests-table tbody tr:hover td { background:rgba(212,175,55,0.04); }
+
+.td-name { font-weight:600; color:#fff; font-size:0.92rem; }
+.td-msg { font-size:0.72rem; color:rgba(255,255,255,0.4); font-style:italic; margin-top:0.2rem; }
+
+.badge-ok {
+  background:rgba(37,211,102,0.15); color:#25d366;
+  border:1px solid rgba(37,211,102,0.35);
+  padding:0.25rem 0.7rem; border-radius:20px;
+  font-size:0.68rem; font-weight:700; white-space:nowrap;
+}
+.badge-no {
+  background:rgba(255,80,80,0.12); color:rgba(255,120,120,0.9);
+  border:1px solid rgba(255,80,80,0.25);
+  padding:0.25rem 0.7rem; border-radius:20px;
+  font-size:0.68rem; font-weight:700; white-space:nowrap;
+}
+
+.wa-btn {
+  background:#25d366; color:white; border:none;
+  padding:0.35rem 0.8rem; border-radius:20px;
+  font-size:0.72rem; cursor:pointer; font-weight:700;
+  display:inline-flex; align-items:center; gap:0.3rem;
+  transition:background 0.2s; white-space:nowrap;
+}
+.wa-btn:hover { background:#128c7e; }
+
+.del-btn {
+  background:transparent; border:1px solid rgba(255,80,80,0.3);
+  color:rgba(255,100,100,0.7); padding:0.3rem 0.6rem;
+  border-radius:6px; cursor:pointer; font-size:0.7rem;
+  transition:all 0.2s;
+}
+.del-btn:hover { background:rgba(255,80,80,0.12); color:#ff6060; border-color:rgba(255,80,80,0.6); }
+
+.persons-badge {
+  background:rgba(100,160,255,0.12);
+  border:1px solid rgba(100,160,255,0.25);
+  padding:0.2rem 0.6rem; border-radius:12px;
+  font-size:0.72rem; color:#90c0ff; white-space:nowrap;
+}
+
+.empty-g {
+  text-align:center; color:rgba(255,255,255,0.3);
+  padding:4rem; font-style:italic; font-size:1.1rem;
+}
+
+/* ===== PIN MODAL ===== */
+.pin-modal {
+  display:flex; position:fixed; inset:0; z-index:9000;
+  background:rgba(0,0,0,0.92); align-items:center; justify-content:center;
+  backdrop-filter:blur(8px);
+}
+.pin-modal.hidden { display:none; }
+.pin-box {
+  background:linear-gradient(160deg, #0a1f5e, #050d2e);
+  border:1px solid rgba(212,175,55,0.4);
+  border-radius:16px; padding:2.5rem;
+  text-align:center; max-width:340px; width:90%;
+  box-shadow:0 0 60px rgba(212,175,55,0.1), 0 20px 60px rgba(0,0,0,0.5);
+}
+.pin-box h3 {
+  color:#d4af37; font-size:1.3rem; letter-spacing:3px;
+  margin-bottom:0.5rem; font-family:'Playfair Display',serif;
+  text-shadow:0 0 20px rgba(212,175,55,0.5);
+}
+.pin-box p { color:rgba(255,255,255,0.45); font-size:0.85rem; margin-bottom:1.8rem; font-style:italic; }
+.pin-input {
+  width:100%; padding:0.85rem; text-align:center;
+  font-size:2rem; letter-spacing:12px;
+  border:1.5px solid rgba(212,175,55,0.3); border-radius:8px;
+  background:rgba(255,255,255,0.04); color:#d4af37;
+  margin-bottom:1rem; outline:none; -webkit-appearance:none;
+  transition:border-color 0.2s;
+}
+.pin-input:focus { border-color:rgba(212,175,55,0.7); }
+.pin-btn {
+  background:linear-gradient(135deg, #d4af37, #b8940a);
+  color:#050d2e; border:none; padding:0.85rem 2rem;
+  font-weight:700; cursor:pointer; border-radius:8px;
+  font-family:'Cormorant Garamond',serif; letter-spacing:3px;
+  width:100%; font-size:1rem; transition:opacity 0.2s;
+}
+.pin-btn:hover { opacity:0.9; }
+.pin-cancel {
+  background:transparent; border:none;
+  color:rgba(255,255,255,0.25); cursor:pointer; font-size:0.82rem;
+  margin-top:1rem; font-family:'Cormorant Garamond',serif;
+  display:block; width:100%; text-decoration:none; text-align:center;
+  transition:color 0.2s;
+}
+.pin-cancel:hover { color:rgba(255,255,255,0.5); }
+
+@media(max-width:600px){
+  .admin-box { padding:1.2rem; }
+  .admin-stats { gap:0.6rem; }
+  .stat-card { padding:0.8rem 0.6rem; }
+  .stat-num { font-size:2rem; }
+  .admin-header { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== MODAL PIN ========== -->
+<div class="pin-modal" id="pinModal">
+  <div class="pin-box">
+    <h3>🔐 ÁREA ADMIN</h3>
+    <p>Ingresa el código para ver la lista de invitados</p>
+    <input type="password" class="pin-input" id="pinInput" maxlength="20" placeholder="••••"
+      onkeydown="if(event.key==='Enter') checkPin()">
+    <button class="pin-btn" onclick="checkPin()">INGRESAR</button><br>
+    <a class="pin-cancel" href="index.html">← Cancelar</a>
+  </div>
+</div>
+
+<!-- ========== PANEL ADMIN ========== -->
+<div class="admin-box" id="adminBox" style="display:none;">
+  <div class="admin-header">
+    <div class="admin-title-wrap">
+      <h2>👥 Lista de Invitados</h2>
+      <div class="sub">Mayra Danica Biktu Antunce · XV Años 2026</div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-refresh" onclick="loadGuests()">🔄 Actualizar</button>
+      <button class="btn-csv" onclick="exportCSV()">📥 CSV</button>
+      <a class="btn-volver" href="index.html">✕ Volver</a>
+    </div>
+  </div>
+
+  <div class="admin-stats">
+    <div class="stat-card">
+      <div class="stat-num" id="adm-total">0</div>
+      <div class="stat-lbl">TOTAL</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num" id="adm-confirm">0</div>
+      <div class="stat-lbl">CONFIRMADOS</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-num" id="adm-persons">0</div>
+      <div class="stat-lbl">PERSONAS</div>
+    </div>
+  </div>
+
+  <div class="admin-filters">
+    <button class="filter-btn active" onclick="setFilter('all', this)">Todos</button>
+    <button class="filter-btn" onclick="setFilter('Confirmado', this)">✅ Confirmados</button>
+    <button class="filter-btn" onclick="setFilter('No asistirá', this)">❌ No asisten</button>
+  </div>
+
+  <div class="table-wrap">
+    <div id="guestsList"><div class="loading">✨ Cargando invitados...</div></div>
+  </div>
+</div>
+
+<script>
+const NOMBRE    = 'Mayra Danica Biktu Antunce';
+const ADMIN_PIN = 'Flavio-741';
+
+let guests = [];
+let currentFilter = 'all';
+
+// ===== PIN =====
+function checkPin(){
+  const val = document.getElementById('pinInput').value;
+  if(val === ADMIN_PIN){
+    document.getElementById('pinModal').classList.add('hidden');
+    document.getElementById('adminBox').style.display = 'block';
+    loadGuests();
+  } else {
+    document.getElementById('pinInput').value = '';
+    document.getElementById('pinInput').placeholder = '❌ PIN incorrecto';
+    setTimeout(() => { document.getElementById('pinInput').placeholder = '••••'; }, 2200);
+  }
+}
+document.getElementById('pinInput').focus();
+
+// ===== CARGAR INVITADOS DESDE EL SERVIDOR =====
+async function loadGuests(){
+  document.getElementById('guestsList').innerHTML = '<div class="loading">✨ Cargando invitados...</div>';
+  try {
+    const res = await fetch('/obtener_invitados');
+    guests = await res.json();
+    renderGuests();
+  } catch(e) {
+    document.getElementById('guestsList').innerHTML = '<p class="empty-g">❌ Error al cargar invitados. Verifica el servidor.</p>';
+  }
+}
+
+// ===== FILTROS =====
+function setFilter(f, btn){
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGuests();
+}
+
+// ===== ELIMINAR =====
+async function deleteGuest(id){
+  if(!confirm('¿Eliminar este invitado?')) return;
+  try {
+    await fetch('/eliminar_invitado/' + id, { method: 'DELETE' });
+    await loadGuests();
+  } catch(e) {
+    // Si no hay ruta de eliminar, eliminar localmente
+    guests = guests.filter(g => g.id !== id);
+    renderGuests();
+  }
+}
+
+// ===== RENDER =====
+function renderGuests(){
+  const filtered = currentFilter === 'all'
+    ? guests
+    : guests.filter(g => g.estado_asistencia === currentFilter);
+
+  const totalPersons = guests.reduce((a, g) => a + parseInt(g.cantidad_personas || 1), 0);
+  document.getElementById('adm-total').textContent   = guests.length;
+  document.getElementById('adm-confirm').textContent = guests.filter(g => g.estado_asistencia === 'Confirmado').length;
+  document.getElementById('adm-persons').textContent = totalPersons;
+
+  const el = document.getElementById('guestsList');
+  if(!filtered.length){
+    el.innerHTML = '<p class="empty-g">✨ No hay invitados en esta categoría aún.</p>';
+    return;
+  }
+
+  const rows = filtered.map((g, i) => `
+    <tr>
+      <td style="color:rgba(212,175,55,0.5);font-size:0.75rem;width:40px;">${i+1}</td>
+      <td>
+        <div class="td-name">${g.nombre_completo}</div>
+        ${g.mensaje ? `<div class="td-msg">"${g.mensaje}"</div>` : ''}
+      </td>
+      <td><span class="persons-badge">${g.cantidad_personas || 1}p</span></td>
+      <td>
+        ${g.estado_asistencia === 'Confirmado'
+          ? '<span class="badge-ok">✅ Confirmado</span>'
+          : '<span class="badge-no">❌ No asiste</span>'}
+      </td>
+      <td style="font-size:0.72rem;color:rgba(255,255,255,0.4);">
+        ${g.fecha_registro ? new Date(g.fecha_registro).toLocaleDateString('es-PE', {day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}) : '-'}
+      </td>
+      <td>
+        <div style="display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;">
+          <button class="wa-btn" onclick="sendWA('${g.whatsapp}','${g.nombre_completo}')">💬 WA</button>
+          <button class="del-btn" onclick="deleteGuest(${g.id})">🗑</button>
+        </div>
+      </td>
+    </tr>`).join('');
+
+  el.innerHTML = `
+    <table class="guests-table">
+      <thead><tr>
+        <th>#</th>
+        <th>INVITADO</th>
+        <th>PERS.</th>
+        <th>ESTADO</th>
+        <th>FECHA</th>
+        <th>ACCIÓN</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+// ===== WHATSAPP =====
+function sendWA(phone, name){
+  const msg = encodeURIComponent('Hola ' + name + '! 🌸 Te escribimos para recordarte los detalles de la fiesta de XV años de ' + NOMBRE + '. ¡Te esperamos! 👑✨');
+  window.open('https://wa.me/51' + phone + '?text=' + msg, '_blank');
+}
+
+// ===== EXPORT CSV =====
+function exportCSV(){
+  if(!guests.length){ alert('No hay invitados aún.'); return; }
+  const header = ['#','Nombre','WhatsApp','Personas','Estado','Mensaje','Fecha'];
+  const rows = guests.map((g,i) => [
+    i+1,
+    g.nombre_completo,
+    g.whatsapp,
+    g.cantidad_personas,
+    g.estado_asistencia,
+    g.mensaje || '',
+    g.fecha_registro || ''
+  ]);
+  const csv = [header, ...rows].map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'invitados_mayra_xv.csv'; a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

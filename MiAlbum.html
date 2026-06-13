@@ -176,24 +176,19 @@ body::before {
   border:1px solid rgba(212,175,55,0.15);
 }
 
-.photo-circle {
-  width:140px; height:140px; border-radius:50%;
-  object-fit:cover; display:block;
-  border:3px solid rgba(212,175,55,0.5);
-  box-shadow:0 0 30px rgba(100,160,255,0.25), 0 0 60px rgba(212,175,55,0.1);
-}
+.photo-circle { width:140px; height:140px; border-radius:50%; object-fit:cover; object-position:center top; display:block; border:3px solid rgba(212,175,55,0.5); box-shadow:0 0 30px rgba(100,160,255,0.25), 0 0 60px rgba(212,175,55,0.1); }
 .photo-placeholder {
   width:140px; height:140px; border-radius:50%;
-  background:radial-gradient(circle at 40% 35%, rgba(100,160,255,0.2), rgba(5,13,46,0.95));
-  border:3px solid rgba(212,175,55,0.4);
+  background:radial-gradient(circle at 40% 35%, rgba(100,160,255,0.22), rgba(5,13,46,0.95));
+  border:2px dashed rgba(212,175,55,0.45);
   box-shadow:0 0 30px rgba(100,160,255,0.2);
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   cursor:pointer; transition:all 0.3s;
-  gap:0.3rem;
+  gap:0.35rem;
 }
-.photo-placeholder:hover { border-color:#d4af37; box-shadow:0 0 40px rgba(212,175,55,0.35); }
-.photo-placeholder .icon { font-size:2.2rem; }
-.photo-placeholder .lbl { font-size:0.5rem; color:rgba(212,175,55,0.5); letter-spacing:2px; }
+.photo-placeholder:hover { border-color:#d4af37; border-style:solid; box-shadow:0 0 40px rgba(212,175,55,0.35); transform:scale(1.03); }
+.photo-placeholder .icon { font-size:2.4rem; opacity:0.85; }
+.photo-placeholder .lbl { font-size:0.55rem; color:rgba(212,175,55,0.65); letter-spacing:3px; font-weight:600; }
 
 /* Gold gems around photo */
 .gem-dot {
@@ -328,14 +323,16 @@ body::before {
 .photo-slot::before { top:-1px; left:-1px; border-width:2px 0 0 2px; }
 .photo-slot::after  { bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
 
-.slot-photo { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
+.slot-photo { width:100%; aspect-ratio:4/3; object-fit:cover; object-position:center top; display:block; }
 .slot-placeholder {
   width:100%; aspect-ratio:4/3;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:0.4rem; color:rgba(212,175,55,0.3); font-size:0.65rem; letter-spacing:2px;
-  background:radial-gradient(ellipse at center, rgba(10,30,80,0.5), rgba(2,8,24,0.8));
+  gap:0.5rem; color:rgba(212,175,55,0.5); font-size:0.62rem; letter-spacing:2px;
+  background:radial-gradient(ellipse at center, rgba(20,45,110,0.55), rgba(2,8,24,0.85));
+  transition:all 0.3s;
 }
-.slot-placeholder .big-icon { font-size:2rem; opacity:0.5; }
+.photo-slot:hover .slot-placeholder { background:radial-gradient(ellipse at center, rgba(30,60,140,0.6), rgba(2,8,24,0.85)); }
+.slot-placeholder .big-icon { font-size:2.2rem; opacity:0.65; filter:drop-shadow(0 0 8px rgba(212,175,55,0.2)); }
 .slot-caption {
   padding:0.6rem 0.8rem;
   font-size:0.72rem; color:rgba(255,255,255,0.5);
@@ -345,7 +342,7 @@ body::before {
 }
 .slot-caption strong { color:rgba(212,175,55,0.7); font-style:normal; display:block; margin-bottom:0.1rem; font-size:0.7rem; letter-spacing:1px; }
 
-.slot-input-hidden { display:none; }
+.slot-input-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
 /* Text content in pages */
 .ap-text-block {
@@ -468,7 +465,7 @@ body::before {
           <div class="gem-dot" style="top:97%; left:50%; margin-left:-3.5px; animation-delay:1.4s;"></div>
           <div class="gem-dot" style="top:50%; left:-2%; margin-top:-3.5px; animation-delay:2.1s;"></div>
         </div>
-        <input type="file" id="coverPhotoIn" accept="image/*" onchange="loadCoverPhoto(this)">
+        <input type="file" id="coverPhotoIn" class="slot-input-hidden" accept="image/*" onchange="loadCoverPhoto(this)">
 
         <div class="cover-title">Mi Álbum de<br>Recuerdos</div>
         <div class="cover-divider"></div>
@@ -551,34 +548,70 @@ body::before {
     <div class="ap-divider"></div>
   </div>
 
-  <div class="two-col">
-    <!-- Photo -->
-    <div>
-      <div class="photo-slot" onclick="document.getElementById('p0photo').click()">
-        <div class="slot-placeholder" id="p0ph"><span class="big-icon">📸</span><span>AGREGAR FOTO</span></div>
-        <img id="p0img" class="slot-photo" src="" style="display:none;" alt="">
-        <div class="slot-caption">
-          <strong>✦ Mi Foto Favorita</strong>
-          Un momento especial que quiero recordar siempre
-        </div>
-      </div>
-      <input type="file" id="p0photo" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p0img','p0ph')">
+  <!-- Text -->
+  <div class="ap-text-block" style="margin-bottom:2rem;">
+    <p>Hola, mi nombre es <span class="highlight">Mayra Danica Biktu Antunce</span> y hoy celebro uno de los días más importantes de mi vida.</p>
+    <div class="quote-box">
+      Hoy tengo 15 años y el mundo entero está frente a mí, lleno de posibilidades y sueños hermosos por alcanzar.
     </div>
-    <!-- Text -->
-    <div class="ap-text-block">
-      <p>Hola, mi nombre es <span class="highlight">Mayra Danica Biktu Antunce</span> y hoy celebro uno de los días más importantes de mi vida.</p>
-      <div class="quote-box">
-        Hoy tengo 15 años y el mundo entero está frente a mí, lleno de posibilidades y sueños hermosos por alcanzar.
+    <p>Nací para brillar, para amar y para llenar de luz la vida de quienes me rodean. <span class="highlight">Este álbum</span> es mi historia contada con amor. ✨</p>
+    <div class="poem">
+      <div class="poem-line gold">✦ M A Y R A ✦</div>
+      <div class="poem-line">Magia en cada paso,</div>
+      <div class="poem-line">Amor que siempre crece,</div>
+      <div class="poem-line">Años que se vuelven recuerdos,</div>
+      <div class="poem-line">Risa que nunca se detiene,</div>
+      <div class="poem-line">Alma que ilumina todo.</div>
+    </div>
+  </div>
+
+  <!-- Galería de 5 fotos -->
+  <div class="ap-header" style="margin-bottom:1.2rem;">
+    <span class="ap-tag">✦ &nbsp; M I S &nbsp; F O T O S &nbsp; ✦</span>
+    <div class="ap-title" style="font-size:1.1rem;">Mi Galería 📸</div>
+    <div class="ap-divider"></div>
+  </div>
+
+  <div class="photo-grid-3">
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p0a').click()">
+        <div class="slot-placeholder" id="p0aph"><span class="big-icon">📸</span><span>AGREGAR FOTO</span></div>
+        <img id="p0aimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Mi Foto Favorita</strong>Un momento especial</div>
       </div>
-      <p>Nací para brillar, para amar y para llenar de luz la vida de quienes me rodean. <span class="highlight">Este álbum</span> es mi historia contada con amor. ✨</p>
-      <div class="poem">
-        <div class="poem-line gold">✦ M A Y R A ✦</div>
-        <div class="poem-line">Magia en cada paso,</div>
-        <div class="poem-line">Amor que siempre crece,</div>
-        <div class="poem-line">Años que se vuelven recuerdos,</div>
-        <div class="poem-line">Risa que nunca se detiene,</div>
-        <div class="poem-line">Alma que ilumina todo.</div>
+      <input type="file" id="p0a" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p0aimg','p0aph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p0b').click()">
+        <div class="slot-placeholder" id="p0bph"><span class="big-icon">🌸</span><span>AGREGAR FOTO</span></div>
+        <img id="p0bimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Sonrisa</strong>Así soy yo</div>
       </div>
+      <input type="file" id="p0b" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p0bimg','p0bph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p0c').click()">
+        <div class="slot-placeholder" id="p0cph"><span class="big-icon">🦋</span><span>AGREGAR FOTO</span></div>
+        <img id="p0cimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Momento Especial</strong>Un recuerdo lindo</div>
+      </div>
+      <input type="file" id="p0c" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p0cimg','p0cph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p0d').click()">
+        <div class="slot-placeholder" id="p0dph"><span class="big-icon">✨</span><span>AGREGAR FOTO</span></div>
+        <img id="p0dimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Mi Esencia</strong>Lo que me hace especial</div>
+      </div>
+      <input type="file" id="p0d" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p0dimg','p0dph')">
+    </div>
+    <div>
+      <div class="photo-slot" onclick="document.getElementById('p0e').click()">
+        <div class="slot-placeholder" id="p0eph"><span class="big-icon">💫</span><span>AGREGAR FOTO</span></div>
+        <img id="p0eimg" class="slot-photo" src="" style="display:none;" alt="">
+        <div class="slot-caption"><strong>✦ Recuerdo</strong>Una foto que amo</div>
+      </div>
+      <input type="file" id="p0e" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p0eimg','p0eph')">
     </div>
   </div>
 </div>
@@ -784,12 +817,10 @@ const totalPages = 5;
 const pageTitles = ['Sobre Mí','Mi Familia','Mis Amigos','Mis Sueños','Mi Noche Especial'];
 
 function openPage(idx){
-  // Close any open page
   document.querySelectorAll('.album-page').forEach(p => p.classList.remove('open'));
   document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
 
   if(currentPage === idx){
-    // Toggle off — close book pages
     currentPage = -1;
     document.getElementById('bookNav').style.display = 'none';
     return;
@@ -801,7 +832,6 @@ function openPage(idx){
   document.getElementById('bookNav').style.display = 'flex';
   updateNav();
 
-  // Smooth scroll to album page
   setTimeout(() => {
     document.getElementById('page-' + idx).scrollIntoView({behavior:'smooth', block:'start'});
   }, 80);
@@ -820,57 +850,73 @@ function updateNav(){
     pageTitles[currentPage] + ' · ' + (currentPage + 1) + ' de ' + totalPages;
 }
 
+// ===== SUBIR FOTO AL SERVIDOR (BASE DE DATOS) =====
+async function subirFoto(file, slot, imgId, phId){
+  const ph = document.getElementById(phId);
+  const originalContent = ph ? ph.innerHTML : '';
+  if(ph) ph.innerHTML = '<span class="big-icon">⏳</span><span>SUBIENDO...</span>';
+
+  const formData = new FormData();
+  formData.append('foto', file);
+  formData.append('slot', slot);
+
+  try {
+    const res = await fetch('/subir_foto', { method: 'POST', body: formData });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Error al subir');
+
+    const img = document.getElementById(imgId);
+    img.src = data.ruta_imagen + '?t=' + Date.now();
+    img.style.display = 'block';
+    if(ph) ph.style.display = 'none';
+  } catch(err){
+    alert('❌ ' + err.message);
+    if(ph) ph.innerHTML = originalContent;
+  }
+}
+
 // Cover photo
 function loadCoverPhoto(input){
   if(!input.files || !input.files[0]) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const img = document.getElementById('coverPhoto');
-    const ph  = document.getElementById('coverPlaceholder');
-    img.src = e.target.result;
-    img.style.display = 'block';
-    ph.style.display  = 'none';
-    try { localStorage.setItem('album_cover_mayra', e.target.result); } catch(err){}
-  };
-  reader.readAsDataURL(input.files[0]);
+  subirFoto(input.files[0], 'cover', 'coverPhoto', 'coverPlaceholder');
 }
 
 // Slot photos
 function loadSlotPhoto(input, imgId, phId){
   if(!input.files || !input.files[0]) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const img = document.getElementById(imgId);
-    const ph  = document.getElementById(phId);
-    img.src = e.target.result;
-    img.style.display = 'block';
-    ph.style.display  = 'none';
-    try { localStorage.setItem('album_slot_' + imgId, e.target.result); } catch(err){}
-  };
-  reader.readAsDataURL(input.files[0]);
+  subirFoto(input.files[0], imgId, imgId, phId);
 }
 
-// Restore saved photos on load
-window.addEventListener('load', () => {
+// ===== CARGAR FOTOS GUARDADAS DESDE LA BASE DE DATOS =====
+window.addEventListener('load', async () => {
   try {
-    const cover = localStorage.getItem('album_cover_mayra');
-    if(cover){
-      document.getElementById('coverPhoto').src = cover;
-      document.getElementById('coverPhoto').style.display = 'block';
-      document.getElementById('coverPlaceholder').style.display = 'none';
-    }
-    const slotIds = ['p0img','p1aimg','p1bimg','p1cimg','p1dimg','p2aimg','p2bimg','p2cimg','p3aimg','p4aimg','p4bimg','p4cimg','p4dimg','p4eimg','p4fimg'];
-    slotIds.forEach(id => {
-      const saved = localStorage.getItem('album_slot_' + id);
-      if(saved){
-        const img = document.getElementById(id);
-        const phId = id.replace('img','ph');
-        img.src = saved; img.style.display = 'block';
-        const ph = document.getElementById(phId);
+    const res = await fetch('/obtener_fotos');
+    const fotos = await res.json();
+
+    fotos.forEach(f => {
+      let imgId, phId;
+      if(f.slot === 'cover'){
+        imgId = 'coverPhoto'; phId = 'coverPlaceholder';
+      } else {
+        imgId = f.slot;
+        phId = f.slot.replace('img','ph');
+      }
+
+      const img = document.getElementById(imgId);
+      const ph  = document.getElementById(phId);
+      if(img){
+        img.onerror = () => {
+          img.style.display = 'none';
+          if(ph) ph.style.display = 'flex';
+        };
+        img.src = f.ruta_imagen + '?t=' + Date.now();
+        img.style.display = 'block';
         if(ph) ph.style.display = 'none';
       }
     });
-  } catch(e){}
+  } catch(e){
+    console.error('Error cargando fotos:', e);
+  }
 });
 </script>
 </body>
