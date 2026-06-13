@@ -137,5 +137,17 @@ app.get('/obtener_invitados', async (req, res) => {
   }
 });
 
+// Eliminar invitado
+app.delete('/eliminar_invitado/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await pool.query('DELETE FROM invitados WHERE id = ?', [id]);
+    res.json({ status: 'success' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ status: 'error', message: err.message });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log('Servidor corriendo en puerto ' + PORT));
