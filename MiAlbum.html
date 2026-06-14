@@ -18,8 +18,6 @@ body {
   padding:2rem 1rem 4rem;
   overflow-x:hidden;
 }
-
-/* Stars background */
 body::before {
   content:'';
   position:fixed; inset:0; z-index:0; pointer-events:none;
@@ -35,8 +33,6 @@ body::before {
     radial-gradient(1px 1px at 60% 80%, rgba(212,175,55,0.3) 0%, transparent 100%),
     radial-gradient(1.5px 1.5px at 35% 90%, rgba(255,255,255,0.2) 0%, transparent 100%);
 }
-
-/* ===== HEADER ===== */
 .page-header {
   position:relative; z-index:2;
   text-align:center; margin-bottom:2.5rem;
@@ -61,23 +57,17 @@ body::before {
   background:linear-gradient(to right, transparent, #d4af37, transparent);
   margin:0.8rem auto 0;
 }
-
-/* ===== BOOK CONTAINER ===== */
 .book-scene {
   position:relative; z-index:2;
   width:100%; max-width:900px;
   perspective:2000px;
 }
-
-/* The open book layout */
 .book {
   display:flex; width:100%;
   min-height:580px;
   position:relative;
   filter:drop-shadow(0 30px 60px rgba(0,0,0,0.7));
 }
-
-/* Spine */
 .book-spine {
   width:30px; flex-shrink:0;
   background:linear-gradient(to right, #0a1535, #162660, #0a1535);
@@ -93,8 +83,6 @@ body::before {
   font-size:0.75rem; color:rgba(212,175,55,0.5);
   letter-spacing:3px; white-space:nowrap;
 }
-
-/* Pages */
 .book-left, .book-right {
   flex:1;
   background:linear-gradient(135deg, #080f2a 0%, #0d1a3e 50%, #060d24 100%);
@@ -112,21 +100,14 @@ body::before {
   border-radius:0 4px 4px 0;
   box-shadow:inset -6px 0 20px rgba(0,0,0,0.3);
 }
-
-/* Page texture lines */
 .book-left::before, .book-right::before {
   content:'';
   position:absolute; inset:0; pointer-events:none;
   background:repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 34px,
-    rgba(212,175,55,0.03) 34px,
-    rgba(212,175,55,0.03) 35px
+    0deg, transparent, transparent 34px,
+    rgba(212,175,55,0.03) 34px, rgba(212,175,55,0.03) 35px
   );
 }
-
-/* Page corners decoration */
 .page-corner {
   position:absolute; width:20px; height:20px;
   border-color:rgba(212,175,55,0.35); border-style:solid;
@@ -135,24 +116,18 @@ body::before {
 .pc-tr { top:10px; right:10px; border-width:2px 2px 0 0; }
 .pc-bl { bottom:10px; left:10px; border-width:0 0 2px 2px; }
 .pc-br { bottom:10px; right:10px; border-width:0 2px 2px 0; }
-
-/* Page number */
 .page-num {
-  position:absolute; bottom:14px; 
+  position:absolute; bottom:14px;
   font-size:0.62rem; color:rgba(212,175,55,0.35);
   letter-spacing:3px;
 }
 .book-left .page-num { left:50%; transform:translateX(-50%); }
 .book-right .page-num { right:50%; transform:translateX(50%); }
-
-/* ===== COVER PAGE (left) ===== */
 .cover-content {
   display:flex; flex-direction:column; align-items:center;
   text-align:center; height:100%; justify-content:center;
   gap:1rem;
 }
-
-/* Photo circle */
 .photo-ring-wrap {
   position:relative; display:inline-block; cursor:pointer;
 }
@@ -175,7 +150,6 @@ body::before {
   position:absolute; inset:-16px; border-radius:50%;
   border:1px solid rgba(212,175,55,0.15);
 }
-
 .photo-circle { width:140px; height:140px; border-radius:50%; object-fit:cover; object-position:center top; display:block; border:3px solid rgba(212,175,55,0.5); box-shadow:0 0 30px rgba(100,160,255,0.25), 0 0 60px rgba(212,175,55,0.1); }
 .photo-placeholder {
   width:140px; height:140px; border-radius:50%;
@@ -189,15 +163,12 @@ body::before {
 .photo-placeholder:hover { border-color:#d4af37; border-style:solid; box-shadow:0 0 40px rgba(212,175,55,0.35); transform:scale(1.03); }
 .photo-placeholder .icon { font-size:2.4rem; opacity:0.85; }
 .photo-placeholder .lbl { font-size:0.55rem; color:rgba(212,175,55,0.65); letter-spacing:3px; font-weight:600; }
-
-/* Gold gems around photo */
 .gem-dot {
   position:absolute; width:7px; height:7px; border-radius:50%;
   background:#d4af37; box-shadow:0 0 8px #d4af37;
   animation:gemPulse 2s ease-in-out infinite;
 }
 @keyframes gemPulse { 0%,100%{opacity:0.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.5);} }
-
 .cover-title {
   font-family:'Dancing Script', cursive;
   font-size:1.9rem; color:#d4af37;
@@ -219,8 +190,6 @@ body::before {
 }
 .cover-bow { font-size:2rem; animation:bowBob 3s ease-in-out infinite; }
 @keyframes bowBob { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
-
-/* ===== RIGHT PAGE — Navigator ===== */
 .right-content {
   display:flex; flex-direction:column; height:100%;
 }
@@ -240,8 +209,6 @@ body::before {
   background:linear-gradient(to right, transparent, rgba(212,175,55,0.3), transparent);
   margin-bottom:1.2rem;
 }
-
-/* Pages navigation tabs */
 .pages-nav {
   display:flex; flex-direction:column; gap:0.6rem; flex:1;
 }
@@ -271,8 +238,6 @@ body::before {
 .tab-title { font-size:0.9rem; color:rgba(255,255,255,0.8); letter-spacing:1px; }
 .tab-sub { font-size:0.68rem; color:rgba(255,255,255,0.3); font-style:italic; margin-top:0.1rem; }
 .tab-icon { font-size:1.2rem; }
-
-/* ===== ALBUM PAGES (full width) ===== */
 .album-page {
   display:none;
   width:100%; max-width:900px;
@@ -288,8 +253,6 @@ body::before {
 }
 .album-page.open { display:block; }
 @keyframes pageOpen { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
-
-/* Album page decorations */
 .album-page::before {
   content:'';
   position:absolute; inset:0; pointer-events:none; border-radius:4px;
@@ -300,17 +263,13 @@ body::before {
 .ap-tr { top:10px; right:10px; border-width:2px 2px 0 0; }
 .ap-bl { bottom:10px; left:10px; border-width:0 0 2px 2px; }
 .ap-br { bottom:10px; right:10px; border-width:0 2px 2px 0; }
-
 .ap-header { text-align:center; margin-bottom:1.8rem; position:relative; z-index:1; }
 .ap-tag { font-size:0.6rem; color:rgba(212,175,55,0.5); letter-spacing:6px; display:block; margin-bottom:0.4rem; }
 .ap-title { font-family:'Playfair Display', serif; font-size:1.5rem; color:#d4af37; letter-spacing:3px; }
 .ap-divider { width:140px; height:1px; background:linear-gradient(to right,transparent,rgba(212,175,55,0.5),transparent); margin:0.6rem auto 0; }
-
-/* Photo grid */
 .photo-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; position:relative; z-index:1; }
 .photo-grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.2rem; position:relative; z-index:1; }
 .photo-grid-1 { display:grid; grid-template-columns:1fr; max-width:380px; margin:0 auto; position:relative; z-index:1; }
-
 .photo-slot {
   position:relative;
   border:1px solid rgba(212,175,55,0.2);
@@ -322,7 +281,6 @@ body::before {
 .photo-slot::before,.photo-slot::after { content:''; position:absolute; width:12px; height:12px; border-color:rgba(212,175,55,0.4); border-style:solid; z-index:2; }
 .photo-slot::before { top:-1px; left:-1px; border-width:2px 0 0 2px; }
 .photo-slot::after  { bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
-
 .slot-photo { width:100%; aspect-ratio:4/3; object-fit:cover; object-position:center top; display:block; }
 .slot-placeholder {
   width:100%; aspect-ratio:4/3;
@@ -341,10 +299,7 @@ body::before {
   position:relative; z-index:1;
 }
 .slot-caption strong { color:rgba(212,175,55,0.7); font-style:normal; display:block; margin-bottom:0.1rem; font-size:0.7rem; letter-spacing:1px; }
-
 .slot-input-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-
-/* Text content in pages */
 .ap-text-block {
   position:relative; z-index:1;
   color:rgba(255,255,255,0.6); font-style:italic;
@@ -355,8 +310,6 @@ body::before {
   color:#d4af37; font-style:normal;
   font-family:'Playfair Display', serif;
 }
-
-/* Quote box */
 .quote-box {
   border-left:3px solid rgba(212,175,55,0.4);
   padding:0.8rem 1.2rem; margin:1.2rem 0;
@@ -366,11 +319,7 @@ body::before {
   position:relative; z-index:1;
 }
 .quote-box::before { content:'"'; font-size:3rem; color:rgba(212,175,55,0.2); position:absolute; top:-0.5rem; left:0.5rem; font-family:'Playfair Display',serif; line-height:1; }
-
-/* 2-col layout */
 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:2rem; position:relative; z-index:1; align-items:start; }
-
-/* Nav buttons */
 .book-nav {
   display:flex; justify-content:center; align-items:center;
   gap:1.5rem; margin-top:1.5rem; position:relative; z-index:2;
@@ -387,23 +336,9 @@ body::before {
   font-size:0.7rem; color:rgba(212,175,55,0.5);
   letter-spacing:3px; min-width:120px; text-align:center;
 }
-
-/* Close page button */
-.close-page-btn {
-  background:transparent; border:1px solid rgba(255,255,255,0.1);
-  color:rgba(255,255,255,0.3); padding:0.3rem 0.8rem;
-  font-size:0.7rem; cursor:pointer; border-radius:20px;
-  font-family:'Cormorant Garamond', serif; letter-spacing:1px;
-  transition:all 0.2s; margin-bottom:0.5rem; display:inline-block;
-}
-.close-page-btn:hover { border-color:rgba(212,175,55,0.3); color:rgba(212,175,55,0.6); }
-
-/* Poem style */
 .poem { text-align:center; position:relative; z-index:1; margin-top:1rem; }
 .poem-line { font-style:italic; color:rgba(255,255,255,0.55); font-size:1rem; line-height:2.2; letter-spacing:1px; }
 .poem-line.gold { color:rgba(212,175,55,0.7); font-style:normal; font-family:'Playfair Display',serif; font-size:0.9rem; letter-spacing:4px; }
-
-/* Responsive */
 @media(max-width:700px){
   .book { flex-direction:column; }
   .book-spine { width:100%; height:20px; writing-mode:horizontal-tb; }
@@ -423,7 +358,6 @@ body::before {
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="page-header">
   <span class="tag">✦ &nbsp; Á L B U M &nbsp; D E &nbsp; R E C U E R D O S &nbsp; ✦</span>
   <h1>Mi Álbum ✨</h1>
@@ -431,26 +365,18 @@ body::before {
   <div class="header-divider"></div>
 </div>
 
-<!-- THE OPEN BOOK -->
 <div class="book-scene">
   <div class="book">
-
-    <!-- SPINE -->
     <div class="book-spine">
       <span class="spine-text">Mis XV Años · 2026</span>
     </div>
-
-    <!-- LEFT PAGE: Cover -->
     <div class="book-left">
       <div class="page-corner pc-tl"></div>
       <div class="page-corner pc-tr"></div>
       <div class="page-corner pc-bl"></div>
       <div class="page-corner pc-br"></div>
-
       <div class="cover-content">
         <div class="cover-bow">👑</div>
-
-        <!-- PHOTO CIRCLE -->
         <div class="photo-ring-wrap">
           <div class="photo-ring" id="coverRing">
             <div class="photo-placeholder" id="coverPlaceholder" onclick="document.getElementById('coverPhotoIn').click()">
@@ -459,35 +385,28 @@ body::before {
             </div>
             <img id="coverPhoto" class="photo-circle" src="" alt="Mayra" style="display:none;">
           </div>
-          <!-- Gem dots -->
           <div class="gem-dot" style="top:2%; left:50%; margin-left:-3.5px; animation-delay:0s;"></div>
           <div class="gem-dot" style="top:50%; left:97%; margin-top:-3.5px; animation-delay:0.7s;"></div>
           <div class="gem-dot" style="top:97%; left:50%; margin-left:-3.5px; animation-delay:1.4s;"></div>
           <div class="gem-dot" style="top:50%; left:-2%; margin-top:-3.5px; animation-delay:2.1s;"></div>
         </div>
         <input type="file" id="coverPhotoIn" class="slot-input-hidden" accept="image/*" onchange="loadCoverPhoto(this)">
-
         <div class="cover-title">Mi Álbum de<br>Recuerdos</div>
         <div class="cover-divider"></div>
         <div class="cover-name">Mayra Danica<br>Biktu Antunce</div>
         <div class="cover-date">✦ &nbsp; XV AÑOS · 2026 &nbsp; ✦</div>
       </div>
-
       <div class="page-num">Portada</div>
     </div>
-
-    <!-- RIGHT PAGE: Index -->
     <div class="book-right">
       <div class="page-corner pc-tl"></div>
       <div class="page-corner pc-tr"></div>
       <div class="page-corner pc-bl"></div>
       <div class="page-corner pc-br"></div>
-
       <div class="right-content">
         <div class="page-label">✦ &nbsp; C O N T E N I D O &nbsp; ✦</div>
         <div class="page-title-big">Mis Páginas</div>
         <div class="right-divider"></div>
-
         <div class="pages-nav">
           <div class="page-tab" id="tab-0" onclick="openPage(0)">
             <span class="tab-num">I</span>
@@ -531,24 +450,20 @@ body::before {
           </div>
         </div>
       </div>
-
       <div class="page-num">Índice</div>
     </div>
   </div>
 </div>
 
-<!-- ===== PAGE I: SOBRE MÍ ===== -->
+<!-- PAGE I -->
 <div class="album-page" id="page-0">
   <div class="ap-corner ap-tl"></div><div class="ap-corner ap-tr"></div>
   <div class="ap-corner ap-bl"></div><div class="ap-corner ap-br"></div>
-
   <div class="ap-header">
     <span class="ap-tag">✦ &nbsp; P Á G I N A &nbsp; I &nbsp; ✦</span>
     <div class="ap-title">Sobre Mí 🦋</div>
     <div class="ap-divider"></div>
   </div>
-
-  <!-- Text -->
   <div class="ap-text-block" style="margin-bottom:2rem;">
     <p>Hola, mi nombre es <span class="highlight">Mayra Danica Biktu Antunce</span> y hoy celebro uno de los días más importantes de mi vida.</p>
     <div class="quote-box">
@@ -564,14 +479,11 @@ body::before {
       <div class="poem-line">Alma que ilumina todo.</div>
     </div>
   </div>
-
-  <!-- Galería de 5 fotos -->
   <div class="ap-header" style="margin-bottom:1.2rem;">
     <span class="ap-tag">✦ &nbsp; M I S &nbsp; F O T O S &nbsp; ✦</span>
     <div class="ap-title" style="font-size:1.1rem;">Mi Galería 📸</div>
     <div class="ap-divider"></div>
   </div>
-
   <div class="photo-grid-3">
     <div>
       <div class="photo-slot" onclick="document.getElementById('p0a').click()">
@@ -616,17 +528,15 @@ body::before {
   </div>
 </div>
 
-<!-- ===== PAGE II: MI FAMILIA ===== -->
+<!-- PAGE II -->
 <div class="album-page" id="page-1">
   <div class="ap-corner ap-tl"></div><div class="ap-corner ap-tr"></div>
   <div class="ap-corner ap-bl"></div><div class="ap-corner ap-br"></div>
-
   <div class="ap-header">
     <span class="ap-tag">✦ &nbsp; P Á G I N A &nbsp; I I &nbsp; ✦</span>
     <div class="ap-title">Mi Familia 💛</div>
     <div class="ap-divider"></div>
   </div>
-
   <div class="photo-grid-2">
     <div>
       <div class="photo-slot" onclick="document.getElementById('p1a').click()">
@@ -663,17 +573,15 @@ body::before {
   </div>
 </div>
 
-<!-- ===== PAGE III: MIS AMIGOS ===== -->
+<!-- PAGE III -->
 <div class="album-page" id="page-2">
   <div class="ap-corner ap-tl"></div><div class="ap-corner ap-tr"></div>
   <div class="ap-corner ap-bl"></div><div class="ap-corner ap-br"></div>
-
   <div class="ap-header">
     <span class="ap-tag">✦ &nbsp; P Á G I N A &nbsp; I I I &nbsp; ✦</span>
     <div class="ap-title">Mis Amigos ✨</div>
     <div class="ap-divider"></div>
   </div>
-
   <div class="photo-grid-3">
     <div>
       <div class="photo-slot" onclick="document.getElementById('p2a').click()">
@@ -700,7 +608,6 @@ body::before {
       <input type="file" id="p2c" class="slot-input-hidden" accept="image/*" onchange="loadSlotPhoto(this,'p2cimg','p2cph')">
     </div>
   </div>
-
   <div style="margin-top:1.5rem;">
     <div class="quote-box" style="position:relative;z-index:1;">
       "Los amigos son la familia que elegimos. Gracias por hacer cada momento más especial y lleno de alegría."
@@ -708,26 +615,22 @@ body::before {
   </div>
 </div>
 
-<!-- ===== PAGE IV: MIS SUEÑOS ===== -->
+<!-- PAGE IV -->
 <div class="album-page" id="page-3">
   <div class="ap-corner ap-tl"></div><div class="ap-corner ap-tr"></div>
   <div class="ap-corner ap-bl"></div><div class="ap-corner ap-br"></div>
-
   <div class="ap-header">
     <span class="ap-tag">✦ &nbsp; P Á G I N A &nbsp; I V &nbsp; ✦</span>
     <div class="ap-title">Mis Sueños 🌟</div>
     <div class="ap-divider"></div>
   </div>
-
   <div class="two-col">
     <div class="ap-text-block">
-      <p>A mis <span class="highlight">quince años</span> el mundo se abre ante mí con infinitas posibilidades. Tengo sueños grandes y el corazón lleno de esperanza.</p>
-
+      <p>A mis <span class="highlight">quince años</span> el mundo se abre ante mí con infinitas posibilidades.</p>
       <div class="quote-box">
         Quiero volar alto, aprender sin límites y dejar huella en todo lo que haga con amor y dedicación.
       </div>
-
-      <p>Mis sueños son mi <span class="highlight">brújula</span>. Cada día me despierto con ganas de ser mejor, de crecer y de hacer felices a quienes amo. 🌟</p>
+      <p>Mis sueños son mi <span class="highlight">brújula</span>. Cada día me despierto con ganas de ser mejor. 🌟</p>
       <p>Esta noche de XV años es solo el comienzo de la historia más <span class="highlight">hermosa</span> que estoy escribiendo. ✨</p>
     </div>
     <div>
@@ -741,17 +644,15 @@ body::before {
   </div>
 </div>
 
-<!-- ===== PAGE V: MI NOCHE ESPECIAL ===== -->
+<!-- PAGE V -->
 <div class="album-page" id="page-4">
   <div class="ap-corner ap-tl"></div><div class="ap-corner ap-tr"></div>
   <div class="ap-corner ap-bl"></div><div class="ap-corner ap-br"></div>
-
   <div class="ap-header">
     <span class="ap-tag">✦ &nbsp; P Á G I N A &nbsp; V &nbsp; ✦</span>
     <div class="ap-title">Mi Noche Especial 👑</div>
     <div class="ap-divider"></div>
   </div>
-
   <div class="photo-grid-3">
     <div>
       <div class="photo-slot" onclick="document.getElementById('p4a').click()">
@@ -804,7 +705,6 @@ body::before {
   </div>
 </div>
 
-<!-- NAVIGATION BUTTONS -->
 <div class="book-nav" id="bookNav" style="display:none;">
   <button class="bnav-btn" id="prevPageBtn" onclick="changePage(-1)" disabled>← ANTERIOR</button>
   <span class="page-indicator" id="pageInd">Página I · 1 de 5</span>
@@ -819,19 +719,16 @@ const pageTitles = ['Sobre Mí','Mi Familia','Mis Amigos','Mis Sueños','Mi Noch
 function openPage(idx){
   document.querySelectorAll('.album-page').forEach(p => p.classList.remove('open'));
   document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
-
   if(currentPage === idx){
     currentPage = -1;
     document.getElementById('bookNav').style.display = 'none';
     return;
   }
-
   currentPage = idx;
   document.getElementById('page-' + idx).classList.add('open');
   document.getElementById('tab-' + idx).classList.add('active');
   document.getElementById('bookNav').style.display = 'flex';
   updateNav();
-
   setTimeout(() => {
     document.getElementById('page-' + idx).scrollIntoView({behavior:'smooth', block:'start'});
   }, 80);
@@ -850,7 +747,7 @@ function updateNav(){
     pageTitles[currentPage] + ' · ' + (currentPage + 1) + ' de ' + totalPages;
 }
 
-// ===== SUBIR FOTO AL SERVIDOR (BASE DE DATOS) =====
+// ===== SUBIR FOTO AL SERVIDOR =====
 async function subirFoto(file, slot, imgId, phId){
   const ph = document.getElementById(phId);
   const originalContent = ph ? ph.innerHTML : '';
@@ -866,7 +763,7 @@ async function subirFoto(file, slot, imgId, phId){
     if(!res.ok) throw new Error(data.error || 'Error al subir');
 
     const img = document.getElementById(imgId);
-    img.src = data.ruta_imagen + '?t=' + Date.now();
+    img.src = data.ruta_imagen; // base64 directo, sin ?t=
     img.style.display = 'block';
     if(ph) ph.style.display = 'none';
   } catch(err){
@@ -875,19 +772,17 @@ async function subirFoto(file, slot, imgId, phId){
   }
 }
 
-// Cover photo
 function loadCoverPhoto(input){
   if(!input.files || !input.files[0]) return;
   subirFoto(input.files[0], 'cover', 'coverPhoto', 'coverPlaceholder');
 }
 
-// Slot photos
 function loadSlotPhoto(input, imgId, phId){
   if(!input.files || !input.files[0]) return;
   subirFoto(input.files[0], imgId, imgId, phId);
 }
 
-// ===== CARGAR FOTOS GUARDADAS DESDE LA BASE DE DATOS =====
+// ===== CARGAR FOTOS DESDE LA BASE DE DATOS =====
 window.addEventListener('load', async () => {
   try {
     const res = await fetch('/obtener_fotos');
@@ -896,20 +791,18 @@ window.addEventListener('load', async () => {
     fotos.forEach(f => {
       let imgId, phId;
       if(f.slot === 'cover'){
-        imgId = 'coverPhoto'; phId = 'coverPlaceholder';
+        imgId = 'coverPhoto';
+        phId = 'coverPlaceholder';
       } else {
         imgId = f.slot;
-        phId = f.slot.replace('img','ph');
+        phId = f.slot.replace('img', 'ph');
       }
 
       const img = document.getElementById(imgId);
       const ph  = document.getElementById(phId);
-      if(img){
-        img.onerror = () => {
-          img.style.display = 'none';
-          if(ph) ph.style.display = 'flex';
-        };
-        img.src = f.ruta_imagen + '?t=' + Date.now();
+
+      if(img && f.ruta_imagen){
+        img.src = f.ruta_imagen; // base64 directo, sin ?t=
         img.style.display = 'block';
         if(ph) ph.style.display = 'none';
       }
